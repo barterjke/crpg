@@ -17,7 +17,12 @@ public class Inventory : MonoBehaviour {
     [Header("data")]
     public InventoryData inventoryData;
 
-    private Transform[,] emptyCells = new Transform[50, 50]; 
+    [HideInInspector] public List<Item> items = new();
+    [HideInInspector] public Unit owner;
+
+    private Transform[,] emptyCells = new Transform[50, 50];
+
+    public bool IsTrader { get { return inventoryData.ownerUnit.isTrader; } }
 
     private void OnValidate() {
         Assert.IsNotNull(itemPrefab);
@@ -40,6 +45,15 @@ public class Inventory : MonoBehaviour {
         itemsFather.SetActive(!itemsFather.activeSelf);
     }
 
+    public Item AddItem(ItemData itemData) {
+        var obj = Instantiate(itemPrefab, itemsFather.transform, false);
+        var item = obj.GetComponent<Item>();
+        items.Add(item);
+        item.itemData = itemData;
+        PlaceIntoPosition(item, itemData.position);
+        return item;
+    }
+
     private void Start() {
         var rect = emptyCellPrefab.transform as RectTransform;
         for (int x = 0; x < inventoryData.size.x; x++) {
@@ -55,10 +69,7 @@ public class Inventory : MonoBehaviour {
         }
 
         foreach (var itemData in inventoryData.items) {
-            var obj = Instantiate(itemPrefab, itemsFather.transform, false);
-            var item = obj.GetComponent<Item>();
-            item.itemData = itemData;
-            PlaceIntoPosition(item, itemData.position);
+            AddItem(itemData);
         }
 
         switchVisibilityButton.onClick.AddListener(SwitchVisibility);

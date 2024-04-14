@@ -8,7 +8,7 @@ using UnityEngine.UIElements;
 public class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler {
     public Item item;
     public CanvasGroup canvasGroup;
-    
+
     public bool isPlaced;
 
     private Vector2 prevPosition;
@@ -25,8 +25,12 @@ public class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     }
 
     public void OnBeginDrag(PointerEventData eventData) {
-        if (!GetItemData().inventoryData.ControlledByPlayer) return;
-        item.GetInventory().transform.SetAsLastSibling();
+        if (!GetItemData().inventoryData.ControlledByPlayer) {
+            eventData.pointerDrag = null;
+            return;
+        }
+        item.inventory.transform.SetAsLastSibling();
+        item.transform.SetAsLastSibling();
         wasRotated = GetItemData().isRotated;
         prevPosition = transform.parent.position;
         offset = transform.parent.position - Input.mousePosition;
@@ -36,17 +40,15 @@ public class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     }
 
     public void OnDrag(PointerEventData eventData) {
-        transform.parent.position = eventData.position + offset;
+        transform.parent.position = Input.mousePosition + (Vector3)offset;//eventData.position + offset;
     }
 
-    public void EndDragSuccessfully(EmptyInvSlot slot) {
+    public void OnCompleteDrag(EmptyInvSlot slot) {
         if (!slot.inventory.inventoryData.ControlledByPlayer) return;
-        if (slot.inventory.inventoryData != item.GetInventory()) {
-            item.TransferToInventory(slot.inventory);
+        if (item.MoveTo(slot.inventory, slot.position)) {
+            isPlaced = true;
+            transform.parent.position = slot.transform.position;
         }
-        GetItemData().position = slot.position;
-        isPlaced = true;
-        transform.parent.position = slot.transform.position;
     }
 
     public void OnEndDrag(PointerEventData eventData) {

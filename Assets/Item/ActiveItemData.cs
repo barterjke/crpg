@@ -10,6 +10,6 @@ using UnityEngine.Assertions;
 public class ActiveItemData : ItemData
 {
     public AudioClip audioClip;
-    public List<AttackType> attacks;
+    public List<Attack> attacks;
     public Texture2D crosshair;
 }

@@ -12,8 +12,8 @@ public class EmptyInvSlot : MonoBehaviour, IDropHandler {
         Draggable draggable;
         if (eventData.pointerDrag
                 && (draggable = eventData.pointerDrag.GetComponent<Draggable>())
-                && inventory.inventoryData.TryToFit(draggable.item.itemData, position)) {
-            draggable.EndDragSuccessfully(this);
+            ) {
+            draggable.OnCompleteDrag(this);
         }
     }
 

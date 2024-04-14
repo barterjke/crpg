@@ -11,21 +11,25 @@ public class ItemData : ScriptableObject
 {
     public InventoryData inventoryData;
     public Sprite sprite;
-    [Min(0)] public int cost;
     public string description;
+    [Min(0)] public int cost;
     [Min(0)] public Vector2Int size;
     [Min(0)] public Vector2Int position;
     public bool expendable = false;
     public bool isRotated;
 
-    public void SetCount()
-    {
-
-    }
     [SerializeField] protected int _count = 1;
+    public int GetCount() {
+        return _count;
+    }
+    public void SetCount(int newCount, Action callback)
+    {
+        _count = newCount;
+        callback();
+    }
 
     public bool TryToFitSelf(Vector2Int newPos) {
-        return inventoryData.TryToFit(this, newPos);
+        return inventoryData.IsFreeSpot(this, newPos);
     }
 
     private void OnValidate()

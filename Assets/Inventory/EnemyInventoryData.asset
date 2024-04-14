@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 883da634e01a5b34d9635062406baa9d, type: 3}
-  m_Name: TraderInventory
+  m_Name: EnemyInventoryData
   m_EditorClassIdentifier: 
   items:
-  - {fileID: 11400000, guid: 3cb877744f5fe21478ac938064467a06, type: 2}
-  - {fileID: 11400000, guid: c31d48a5d24bb3f439401250c3a9a453, type: 2}
-  size: {x: 5, y: 5}
-  ownerUnit: {fileID: 11400000, guid: cf51629c4373b2e41b7e436cc62a7fa7, type: 2}
+  - {fileID: 11400000, guid: d9156623fccba7742aefc5c79af93cb8, type: 2}
+  size: {x: 3, y: 3}
+  ownerUnit: {fileID: 11400000, guid: 33448df29f7951740b63d29ee0826c38, type: 2}

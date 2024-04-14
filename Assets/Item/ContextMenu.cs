@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class ContextMenu : MonoBehaviour, IPointerClickHandler, IBeginDragHandler {
     public GameObject ctxMenuFather;
+    public Item item;
+    public Button activateButton;
 
     public void OnBeginDrag(PointerEventData eventData) {
         ctxMenuFather.SetActive(false);
@@ -19,9 +22,15 @@ public class ContextMenu : MonoBehaviour, IPointerClickHandler, IBeginDragHandle
 
     private void OnValidate() {
         Assert.IsNotNull(ctxMenuFather);
+        Assert.IsNotNull(item);
+        Assert.IsNotNull(activateButton);
     }
 
     void Start() {
+        activateButton.onClick.AddListener(() => {
+            item.Act();
+            ctxMenuFather.SetActive(false);
+        });
     }
 
     void LateUpdate() {

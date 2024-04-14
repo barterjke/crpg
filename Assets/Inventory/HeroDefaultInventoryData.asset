@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HeroDefaultInventoryData
   m_EditorClassIdentifier: 
   items:
-  - {fileID: 11400000, guid: 3108ccc0e67a82b47a73ef9934d38eae, type: 2}
+  - {fileID: 11400000, guid: 4033e4a923e112a46a9b233a740ac63f, type: 2}
   - {fileID: 11400000, guid: e8dc3e8e12fa0984c94ea49da8396dd5, type: 2}
   size: {x: 3, y: 3}
   ownerUnit: {fileID: 11400000, guid: b332d04b1f988ab4bbafd2c578f325b9, type: 2}

@@ -16,9 +16,11 @@ public class GlobalManager : MonoBehaviour {
     public string dialogueScene;
     public string defeatScene; //todo
 
-    public static Random rand = new Random(DateTime.Now.ToString().GetHashCode());
+    [HideInInspector] public int assetIndex;
 
-    [HideInInspector] public static GlobalManager Instance;
+    public static GlobalManager Instance;
+
+    public static Random rand = new Random(DateTime.Now.ToString().GetHashCode());
 
     private void Awake() {
         if (Instance != null && Instance != this) {

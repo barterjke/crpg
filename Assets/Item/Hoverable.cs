@@ -7,29 +7,28 @@ using UnityEngine.EventSystems;
 
 public class Hoverable : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
     public TMP_Text descriptionLabel;
-    public ItemData itemData;
+    public Item item;
+
+    void SwitchVisibility(bool value) {
+        descriptionLabel.transform.parent.gameObject.SetActive(value);
+    }
 
     public void OnPointerEnter(PointerEventData eventData) {
-        descriptionLabel.gameObject.SetActive(true);
+        SwitchVisibility(true);
     }
 
     public void OnPointerExit(PointerEventData eventData) {
-        descriptionLabel.gameObject.SetActive(false);
+        SwitchVisibility(false);
     }
 
     void OnValidate() {
         Assert.IsNotNull(descriptionLabel);
-        Assert.IsNotNull(itemData);
+        Assert.IsNotNull(item);
     }
 
     void Start()
     {
-        descriptionLabel.text = itemData.description;
-        descriptionLabel.gameObject.SetActive(false);
-    }
-
-    void Update()
-    {
-        
+        descriptionLabel.text = item.itemData.description;
+        SwitchVisibility(false);
     }
 }

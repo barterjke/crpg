@@ -8,7 +8,7 @@ public static class RandUtil
     public static T PickRandom<T>(this T[] array)
     {
         if (array == null || array.Length == 0)
-            throw new ArgumentException("Array is empty or null", nameof(array));
+            throw new ArgumentException("Array is empty or null", typeof(T).FullName);
         int randomIndex = rand.Next(array.Length);
         return array[randomIndex];
     }
@@ -16,7 +16,7 @@ public static class RandUtil
     public static T PickRandom<T>(this List<T> list)
     {
         if (list == null || list.Count == 0)
-            throw new ArgumentException("List is empty or null", nameof(list));
+            throw new ArgumentException($"List is empty or null", typeof(T).FullName);
         int randomIndex = rand.Next(list.Count);
         return list[randomIndex];
     }
