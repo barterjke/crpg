@@ -3,7 +3,7 @@ using System;
 
 public static class RandUtil
 {
-    private static Random rand = new Random(DateTime.Now.ToString().GetHashCode());
+    public static Random rand = new Random(DateTime.Now.ToString().GetHashCode());
 
     public static T PickRandom<T>(this T[] array)
     {

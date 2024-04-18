@@ -21,9 +21,9 @@ public class ContextMenu : MonoBehaviour, IPointerClickHandler, IBeginDragHandle
     }
 
     private void OnValidate() {
-        Assert.IsNotNull(ctxMenuFather);
-        Assert.IsNotNull(item);
-        Assert.IsNotNull(activateButton);
+        Assert.IsNotNull(ctxMenuFather, name);
+        Assert.IsNotNull(item, name);
+        Assert.IsNotNull(activateButton, name);
     }
 
     void Start() {

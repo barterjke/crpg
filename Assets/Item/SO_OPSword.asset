@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da590f8b1f5875e4db9014f2298bd837, type: 3}
+  m_Name: SO_OPSword
+  m_EditorClassIdentifier: 
+  inventoryData: {fileID: 11400000, guid: db95cbe58c1241842966fdba033c6bb2, type: 2}
+  sprite: {fileID: 21300000, guid: 963b26b2442c9f047997c601b34ac4a7, type: 3}
+  description: Deals insane damage!
+  cost: 10
+  size: {x: 1, y: 2}
+  position: {x: 1, y: 1}
+  expendable: 0
+  isRotated: 0
+  _count: 10
+  audioClip: {fileID: 8300000, guid: 0da237c230af93e47b453f48e25ac6cb, type: 3}
+  attacks:
+  - type: 6
+    animation: {fileID: 1700743117749328464, guid: 2b3647cb279ba5d469923cc9e5cc9ccf, type: 3}
+    duration: 0
+    area: 1
+    value: 1000
+  - type: 8
+    animation: {fileID: 0}
+    duration: 1
+    area: 0
+    value: 0
+  crosshair: {fileID: 2800000, guid: bcaace1f332f4e54aaa45048056f9825, type: 3}

@@ -274,9 +274,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryPrefab: {fileID: 1648231020796492441, guid: cef1fd01d8525414085b4ed658bce4bf, type: 3}
+  coinDataPrefab: {fileID: 11400000, guid: 3cb877744f5fe21478ac938064467a06, type: 2}
   canvas: {fileID: 1654026065}
   continueButton: {fileID: 30314361}
-  traderInventoryData: {fileID: 11400000, guid: eba3c354987e05f4c98ce84a84c91794, type: 2}
+  traderInventoryData: {fileID: 11400000, guid: ccc866303eb24e748a511b877a50cf42, type: 2}
 --- !u!4 &933228803
 Transform:
   m_ObjectHideFlags: 0
@@ -336,8 +337,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f423b178fa81e3e48bf1e9b13200a7f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  units:
+  playerUnits:
   - {fileID: 11400000, guid: b332d04b1f988ab4bbafd2c578f325b9, type: 2}
+  enemyUnits: []
+  mapData: {fileID: 11400000, guid: dd2c1706dca0b6f47b66857659d02cb2, type: 2}
   mapScene: MapScene
   battleScene: BattleScene
   shopScene: ShopScene

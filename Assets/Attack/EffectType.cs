@@ -6,5 +6,7 @@
     DoubleTurn,
     Vampiric,
     Damage,
+    MagicDamage,
+    Tired,
     Heal
 }

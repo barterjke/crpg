@@ -10,7 +10,7 @@ public class DoubleClickable : MonoBehaviour, IPointerClickHandler {
     private TradingManager tradingManager;
 
     void OnValidate() {
-        Assert.IsNotNull(item);
+        Assert.IsNotNull(item, name);
     }
 
 

@@ -9,9 +9,9 @@ public class RandomAI : AbstractAI {
     public Unit unit;
     public BattleManager battleManager;
 
-    private void OnValidate() {
-        Assert.IsNotNull(unit);
-        Assert.IsNotNull(battleManager);
+    private void Start() {
+        Assert.IsNotNull(unit, name);
+        Assert.IsNotNull(battleManager, name);
     }
 
     public override IEnumerator Think() {

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e176c8b172424ad42844527287e51b2a, type: 3}
+  m_Name: SO_SkeletonRose
+  m_EditorClassIdentifier: 
+  isTrader: 0
+  controlledByPlayer: 0
+  inventoryData: {fileID: 11400000, guid: 7a89a49b1d0f0d9428218a613670b178, type: 2}
+  sprite: {fileID: 21300000, guid: e37bfcca297d617449668f3da1a37323, type: 3}
+  activeStatuses: []
+  maxHealth: 10
+  health: 10

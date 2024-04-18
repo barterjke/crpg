@@ -365,8 +365,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bb4d5700067d7e428c8068cda503f1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapData: {fileID: 11400000, guid: dd2c1706dca0b6f47b66857659d02cb2, type: 2}
   mapCellPrefab: {fileID: 8162136058537760885, guid: 781c21c791edd514fb08103d36541d82, type: 3}
+  shopSprite: {fileID: 21300000, guid: 496a455a3b508b04098a325272744061, type: 3}
+  dialogueSprite: {fileID: 21300000, guid: 9bda48f58a2f57844a1ff878d963707e, type: 3}
+  battleSprite: {fileID: 21300000, guid: 7f6bd1600fcb15645b8dfd34434b1b2f, type: 3}
+  clearedSprite: {fileID: 21300000, guid: 561c5e7cbe461da42aeb90c5e41ad837, type: 3}
+  currentSprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!1 &1264881600
 GameObject:
   m_ObjectHideFlags: 0
@@ -479,8 +483,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f423b178fa81e3e48bf1e9b13200a7f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  units:
+  playerUnits:
   - {fileID: 11400000, guid: b332d04b1f988ab4bbafd2c578f325b9, type: 2}
+  enemyUnits:
+  - {fileID: 11400000, guid: d735ad35678291349b344dfac2d5de1a, type: 2}
+  - {fileID: 11400000, guid: 7bbd97cddfc134e498801971e022ad79, type: 2}
+  - {fileID: 11400000, guid: 33448df29f7951740b63d29ee0826c38, type: 2}
+  - {fileID: 11400000, guid: 6b8a4eb672ced984eb81f748503ac94e, type: 2}
+  - {fileID: 11400000, guid: 33dee01b61d39d14d82d9b3c9377d1ad, type: 2}
+  mapData: {fileID: 11400000, guid: dd2c1706dca0b6f47b66857659d02cb2, type: 2}
   mapScene: MapScene
   battleScene: BattleScene
   shopScene: ShopScene
@@ -491,6 +502,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 369242699}
-  - {fileID: 2037884970}
   - {fileID: 556277707}
   - {fileID: 1264881603}
+  - {fileID: 2037884970}

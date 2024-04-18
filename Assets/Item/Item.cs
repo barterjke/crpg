@@ -13,50 +13,73 @@ public class Item : MonoBehaviour {
     public TMP_Text countLabel;
     public TMP_Text costLabel;
 
-    public Inventory inventory { get; private set; }
+    public CanvasGroup canvasGroup;
+    public Draggable draggable;
+
+    public Inventory inventory;
 
     private BattleManager battleManager;
     private TradingManager tradingManager;
 
     void OnValidate() {
-        Assert.IsNotNull(itemData);
-        Assert.IsNotNull(spriteImage);
-        Assert.IsNotNull(countLabel);
-        Assert.IsNotNull(costLabel);
-    }
-
-    public void InitRotation() {
-        if (itemData.isRotated) {
-            spriteImage.transform.Rotate(0, 0, 90);
-            (spriteImage.transform as RectTransform).sizeDelta = new Vector2(itemData.size.y, itemData.size.x) * 100;
-        } else {
-            (spriteImage.transform as RectTransform).sizeDelta = itemData.size * 100;
-        }
+        Assert.IsNotNull(itemData, name);
+        Assert.IsNotNull(spriteImage, name);
+        Assert.IsNotNull(countLabel, name);
+        Assert.IsNotNull(costLabel, name);
+        Assert.IsNotNull(canvasGroup, name);
+        Assert.IsNotNull(draggable, name);
     }
 
     void Start() {
         battleManager = FindAnyObjectByType<BattleManager>();
         tradingManager = FindAnyObjectByType<TradingManager>();
-        inventory = transform.parent.parent.GetComponent<Inventory>();
         Assert.IsNotNull(inventory);
 
+        countLabel.gameObject.SetActive(itemData.expendable);
         SetCount(itemData.GetCount());
-        if (!tradingManager)
+
+        if (!tradingManager) {
             costLabel.gameObject.SetActive(false);
-        else
+        } else {
             UpdateCostLabel();
+        }
 
         spriteImage.sprite = itemData.sprite;
         InitRotation();
+    }
 
+    public void InitRotation() {
+        var rects = inventory.emptyCellPrefab.GetComponentsInChildren<RectTransform>();
+        //Assert.IsTrue(slotRect.sizeDelta.x == slotRect.sizeDelta.y);
+        var width = rects[0].sizeDelta.x;
+        var padding = width - rects[1].sizeDelta.x;
+        var slotSize = new Vector2(itemData.size.x * width - padding,
+                                itemData.size.y * width - padding);
+        if (itemData.isRotated) {
+            //draggable.Rotate();
+            spriteImage.transform.Rotate(0, 0, 90);
+            (spriteImage.transform as RectTransform).sizeDelta = new(slotSize.y, slotSize.x);
+        } else {
+            (spriteImage.transform as RectTransform).sizeDelta = slotSize;
+        }
     }
 
     public void TransferToInventory(Inventory newInventory) {
-        itemData.inventoryData.items.Remove(itemData);
+        print($"item {itemData} removing from inv {itemData.inventoryData}");
+        foreach (var item in itemData.inventoryData.items) {
+            print($"{item} {itemData} {item == itemData}");
+        }
+        bool res = itemData.inventoryData.items.Remove(itemData);
+        print(res);
         newInventory.inventoryData.items.Add(itemData);
         itemData.inventoryData = newInventory.inventoryData; // should be a two way binding?
         inventory = newInventory;
         transform.SetParent(newInventory.itemsFather.transform);
+    }
+
+    public void RemoveSelf() {
+        DestroyImmediate(itemData, true); // todo check if it works
+        Destroy(gameObject);
     }
 
     public bool MoveTo(Inventory targetInventory, Vector2Int newPos) {
@@ -65,6 +88,7 @@ public class Item : MonoBehaviour {
             print("item belongs to enemy");
             return false;
         }
+
         if (targetInventory.inventoryData.IsFreeSpot(itemData, newPos)) {
             if (inventory != targetInventory) {
                 if (!tradingManager.Trade(this)) return false;
@@ -73,6 +97,16 @@ public class Item : MonoBehaviour {
             itemData.position = newPos;
             return true;
         }
+
+        var stackableItem = targetInventory.GetStackable(itemData, newPos);
+        if (stackableItem) {
+            print("stacking two items");
+            stackableItem.SetCount(stackableItem.itemData.GetCount() + itemData.GetCount());
+            draggable.SwitchAllItemsCanvasGroup(true);
+            RemoveSelf();
+            return true;
+        }
+
         return false;
     }
 
@@ -95,7 +129,8 @@ public class Item : MonoBehaviour {
     }
 
     public void UpdateCountLabel() {
-        countLabel.text = "x" + itemData.GetCount().ToString();
+        if (itemData.expendable)
+            countLabel.text = "x" + itemData.GetCount().ToString();
     }
 
     public void SetCount(int value) {

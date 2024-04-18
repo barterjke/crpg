@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -15,8 +18,30 @@ public class UnitData : ScriptableObject {
     [Min(1)] public int health;
 
     private void OnValidate() {
-        Assert.IsNotNull(inventoryData);
-        Assert.IsNotNull(sprite);
-        Assert.IsTrue(maxHealth > 0);
+        Assert.IsNotNull(inventoryData, name);
+        Assert.IsNotNull(sprite, name);
+        Assert.IsTrue(maxHealth > 0, name);
+    }
+
+    public UnitData Clone(bool createAsset = false) {
+        var newUnitData = CreateInstance<UnitData>();
+        newUnitData.controlledByPlayer = controlledByPlayer;
+        newUnitData.sprite = sprite;
+        newUnitData.activeStatuses.AddRange(activeStatuses);
+        newUnitData.maxHealth = maxHealth;
+        newUnitData.health = maxHealth;
+        newUnitData.inventoryData = inventoryData.Clone();
+        newUnitData.inventoryData.ownerUnit = this;
+        var path = AssetLoader.ConstructPath(this);
+        newUnitData.name = path.Split("/").Last();
+        if (newUnitData.name.EndsWith(".asset")) {
+            newUnitData.name = newUnitData.name[..^6];
+        }
+        if (createAsset) {
+            AssetDatabase.CreateAsset(newUnitData, path);
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+        }
+        return newUnitData;
     }
 }

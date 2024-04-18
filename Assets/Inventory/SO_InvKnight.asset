@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 883da634e01a5b34d9635062406baa9d, type: 3}
+  m_Name: SO_InvKnight
+  m_EditorClassIdentifier: 
+  items:
+  - {fileID: 11400000, guid: fe8d11c71d9cf03448966c92ab821eda, type: 2}
+  - {fileID: 11400000, guid: 3cb877744f5fe21478ac938064467a06, type: 2}
+  - {fileID: 11400000, guid: c0263dd2c77bb3f4bb982e2eca023833, type: 2}
+  size: {x: 4, y: 3}
+  ownerUnit: {fileID: 11400000, guid: b332d04b1f988ab4bbafd2c578f325b9, type: 2}

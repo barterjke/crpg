@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -8,7 +9,9 @@ using UnityEngine.SceneManagement;
 using Random = System.Random;
 
 public class GlobalManager : MonoBehaviour {
-    public List<UnitData> units;
+    public List<UnitData> playerUnits;
+    public List<UnitData> enemyUnits;
+    public MapData mapData;
 
     public string mapScene;
     public string battleScene;
@@ -16,11 +19,7 @@ public class GlobalManager : MonoBehaviour {
     public string dialogueScene;
     public string defeatScene; //todo
 
-    [HideInInspector] public int assetIndex;
-
     public static GlobalManager Instance;
-
-    public static Random rand = new Random(DateTime.Now.ToString().GetHashCode());
 
     private void Awake() {
         if (Instance != null && Instance != this) {
@@ -29,8 +28,8 @@ public class GlobalManager : MonoBehaviour {
         }
         Instance = this;
         DontDestroyOnLoad(this);
-
     }
+
 
     void Start() {
         Assert.IsTrue(Application.CanStreamedLevelBeLoaded(mapScene));
@@ -38,4 +37,12 @@ public class GlobalManager : MonoBehaviour {
         Assert.IsTrue(Application.CanStreamedLevelBeLoaded(dialogueScene));
         Assert.IsTrue(Application.CanStreamedLevelBeLoaded(shopScene));
     }
+
+    public List<UnitData> PopulateEnemies() {
+        List<UnitData> result = new() {
+            enemyUnits.PickRandom()
+        };
+        return result;
+    }
+
 }
